@@ -7,7 +7,7 @@ SRCS = cppmain.c \
 	tokenizer.c \
 	preproc.c
 
-LIBULZ_BASE?=../cdev/cdev/lib/
+LIBULZ_BASE?=../libulz
 
 LIBS = 
 
