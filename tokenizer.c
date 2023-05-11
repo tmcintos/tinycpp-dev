@@ -251,7 +251,7 @@ static int is_sep(int c) {
 static int apply_coords(struct tokenizer *t, struct token* out, char *end, int retval) {
 	out->line = t->line;
 	uintptr_t len = end - t->buf;
-	out->column = t->column - len;
+	out->column = (uint32_t)(t->column - len);
 	if(len + 1 >= t->bufsize) {
 		out->type = TT_OVERFLOW;
 		return 0;
@@ -386,7 +386,7 @@ int tokenizer_read_until(struct tokenizer *t, const char* marker, int stop_at_nl
 		tokenizer_ungetc(t, marker[--i]);
 	return 1;
 }
-static int ignore_until(struct tokenizer *t, const char* marker, int col_advance)
+static int ignore_until(struct tokenizer *t, const char* marker, size_t col_advance)
 {
 	t->column += col_advance;
 	int c;
