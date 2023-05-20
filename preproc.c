@@ -994,7 +994,7 @@ static int charlit_to_int(const char *lit) {
 		case 'n': return 10;
 		case 't': return 9;
 		case 'r': return 13;
-		case 'x': return strtol(lit+3, NULL, 16);
+		case 'x': return (int)strtol(lit+3, NULL, 16);
 		default: return lit[2];
 	}
 	return lit[1];
@@ -1008,7 +1008,7 @@ static int nud(struct tokenizer *t, struct token *tok, int *err) {
 		case TT_HEX_INT_LIT:
 		case TT_OCT_INT_LIT:
 		case TT_DEC_INT_LIT:
-			return strtol(t->buf, NULL, 0);
+			return (int)strtol(t->buf, NULL, 0);
 		case TT_NEG:   return ~ expr(t, bp(tok->type), err);
 		case TT_PLUS:  return expr(t, bp(tok->type), err);
 		case TT_MINUS: return - expr(t, bp(tok->type), err);
